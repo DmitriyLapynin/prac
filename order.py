@@ -2,9 +2,9 @@ from enum import Enum
 
 
 class OrderStatus(Enum):
-    RECV = 'Поступил'
-    PART = 'Частично исполнен'
-    DONE = 'Выполнен'
+    RECV = 'Receive'
+    PART = 'Not complete'
+    DONE = 'Complete'
 
     def __next__(status):
         if status == OrderStatus.RECV:
@@ -33,7 +33,7 @@ class BookOrder(Order):
         self.name, self.phone, self.book_list = order_args
 
     def get_books_num(self):
-        return sum(map(lambda b: b.copies_num, self.book_list))
+        return sum(map(lambda b: b.cnt_copy, self.book_list))
 
 
 class PublishingOrder(Order):
