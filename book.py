@@ -24,28 +24,6 @@ class Partition():
 
 
 class Book():
-    '''def __init__(self, name, author, publishing, year, pages_num, theme, category, margin, rating):
-        self.name : str
-        self.author : str
-        self.publishing : str
-        self.year : int
-        self.pages_num : int
-        self.theme : str
-        self.category : str
-
-        self.margin : int
-        self.start_rating : int
-        self.rating : int
-
-        self.price : int
-
-    # ежеденвный перерасчёт цены
-    def recalс_price(self):
-        pass
-
-    # ежеденвный перерасчёт рейтинга
-    def recalculate_rating(self, orders_num, all_orders):
-        pass'''
 
     def __init__(self, name=None, author=None, book_args=[None] * 4, margin=None, start_rating=None):
         self.name, self.author = name, author

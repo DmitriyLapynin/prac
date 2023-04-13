@@ -8,48 +8,6 @@ from tkinter import ttk
 import random
 
 
-'''class Model:
-
-    def __init__(self, period, step, file_name):
-        self.period: int  # период моделирования
-        self.step: int  # шаг моделирования
-        self.stat: dict  # статистика
-        self.file: str  # названия файла с книгами
-        self.book_shop: BookShop  # книжный магазин
-
-
-    # 1) Функция начала отрисовки экрана при запуске приложения
-    def start(self):
-        pass
-
-    # 2) Начать заново
-    def restart(self):
-        pass
-
-    # 3) Сделать один шаг
-    def make_step(self):
-        pass
-
-    # 4) Посчитать статистику
-    def calc_stat(self):
-        pass
-
-    # 5) Вывести статистику
-    def show_stat(self):
-        pass
-
-    # 6) Генерация списка закаызваемых книг
-    def generate_books(self) -> List[Book] :
-        pass
-
-    # 6) Выполнение заявки на книгу и обновление ассортимента книжного магазина
-    def make_book_order(self):
-        pass
-
-    # 7) Выполнение заявки в издательство и обновление ассортимента книжного магазина
-    def make_publish_order(self):
-        pass'''
-
 
 
 
