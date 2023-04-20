@@ -1,5 +1,4 @@
 import model
+from gui import Gui
 
-
-bookshop = model.Model()
-bookshop.start()
+Gui()

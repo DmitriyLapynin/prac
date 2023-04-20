@@ -21,6 +21,8 @@ class Partition():
     def __init__(self, cnt_copy):
         self.book = Book() # книга
         self.cnt_copy = cnt_copy # кол-во
+        self.tmp_copy = cnt_copy
+        self.cnt_done = 0
 
 
 class Book():

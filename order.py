@@ -33,7 +33,7 @@ class BookOrder(Order):
         self.name, self.phone, self.book_list = order_args
 
     def get_books_num(self):
-        return sum(map(lambda b: b.cnt_copy, self.book_list))
+        return sum(map(lambda b: b.tmp_copy, self.book_list))
 
 
 class PublishingOrder(Order):

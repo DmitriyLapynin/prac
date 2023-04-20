@@ -56,7 +56,7 @@ class BookShop:
 
         return find_book
 
-    # Нахлждение последней книги автора
+    # Нахождение последней книги автора
     def find_the_last(self, author: str) -> int:
         last_year, last_book = 0, None
         for i, part in enumerate(self.book_list):
@@ -102,18 +102,22 @@ class BookShop:
             need_order_copies, was_need_copies = 0, 0
             for part in filter(lambda b: b.cnt_copy != 0, order.book_list):
                 find_book = self.search_book(part)
+                tmp = find_book.cnt_copy
                 need_copies = self.remove(find_book, part.cnt_copy)
-
                 if need_copies > 0:
                     self.add_application(find_book, need_copies, day)
+                    part.cnt_done += tmp
+                else:
+                    if part.cnt_done == 0:
+                        part.cnt_done = part.cnt_copy - need_copies
+                    else:
+                        part.cnt_done += part.cnt_copy - need_copies
 
                 self.add_sold(find_book, part.cnt_copy - need_copies)
 
                 need_order_copies += need_copies
                 was_need_copies += part.cnt_copy
-
                 part.cnt_copy = need_copies
-
             if need_order_copies == was_need_copies:
                 continue
             if order.status.is_recv() and need_order_copies > 0:
@@ -172,4 +176,28 @@ class BookShop:
             if application.status.is_done():
                 self.add(application.book_list)
                 application.books_num = 0
+
+    def top_sold(self, groupby: str = "book"):
+        """ Вспомогательная функция для подсчета статистики среди проданных книг """
+        if groupby == "book":
+            top_list = sorted(self.sold, key=lambda b: b.cnt_copy, reverse=True)[:3]
+            top_list = {part.book.get_name(): ', '.join(map(str, [part.book.rating, part.cnt_copy])) for part in top_list}
+
+        elif groupby == "author":
+            top_list = {}
+            authors = set(map(lambda b: b.book.author, self.sold))
+            for author in authors:
+                sum_copies = sum(map(lambda b: b.cnt_copy, filter(lambda b: b.book.author == author, self.sold)))
+                top_list[author] = sum_copies
+            top_list = dict(sorted(top_list.items(), key=lambda t: t[1], reverse=True)[:3])
+
+        elif groupby == "category":
+            top_list = {}
+            categories = set(map(lambda b: b.book.category, self.sold))
+            for category in categories:
+                sum_copies = sum(map(lambda b: b.cnt_copy, filter(lambda b: b.book.category == category, self.sold)))
+                top_list[category.value] = sum_copies
+            top_list = dict(sorted(top_list.items(), key=lambda t: t[1], reverse=True)[:3])
+
+        return top_list
 
